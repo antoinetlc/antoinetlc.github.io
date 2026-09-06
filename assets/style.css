@@ -1,0 +1,296 @@
+/* ============================================================
+   Antoine Toisoul — personal site
+   ============================================================ */
+
+:root {
+  --bg:        #f6ece1;   /* warm cream page ground            */
+  --bg-alt:    #f0e2d2;   /* very slightly darker cream        */
+  --text:      #2b2b2b;   /* body copy                         */
+  --muted:     #6b6257;   /* captions, footer                  */
+  --accent:    #4f74ab;   /* blue — links, section headings    */
+  --accent-dk: #3c5a88;   /* blue hover                        */
+  --hero-text: #ffffff;
+  --rule:      #d9c9b6;   /* hairline dividers                 */
+  --maxw:      960px;
+  --font-body:    "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-display: var(--font-body);   /* headings share the body font */
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.9;
+  font-weight: 400;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:hover { color: var(--accent-dk); text-decoration: underline; }
+
+strong, b { font-weight: 600; }
+
+/* ---------- Header (sticky bar, always visible) ------------ */
+
+.site-header {
+  position: fixed;              /* out of flow, so the hero starts at the very top */
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.0rem clamp(1rem, 4vw, 2.5rem);
+  background: rgba(246, 236, 225, 0.3);   /* --bg (#f6ece1) at 80% */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.wordmark {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+}
+.wordmark:hover { color: var(--accent); text-decoration: none; }
+
+.site-nav {
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1.4rem;
+}
+
+.site-nav a {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text);
+}
+.site-nav a:hover { text-decoration: none; color: var(--accent); }
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+.site-social {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.site-header .site-social { margin-left: 2rem; }   /* breathing room between the menu and the icons */
+.site-social a { display: inline-flex; color: var(--muted); }
+.site-social a:hover { color: var(--accent); }
+.site-social svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* ---------- Hero (decorative image band, no text) --------- */
+
+.hero {
+  min-height: 500px;
+  background-color: #7a8ba0;
+  background-position: center 40%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Left-aligned page heading inside <main>, replaces the old hero title */
+.page-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 4vw, 2.4rem);
+  color: var(--text);
+  margin: 0 0 2rem;
+}
+.page-title--center { text-align: center; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip: rect(0 0 0 0); clip-path: inset(50%);
+  overflow: hidden; white-space: nowrap;
+}
+
+/* Per-page hero images. */
+.hero--home         { background-image: url("img/home/royal_albert_hall.jpg"); }
+.hero--news         { background-image: url("img/news/dolphin.jpg"); }
+.hero--publications { background-image: url("img/publications/tokyo.jpg"); background-position: center 60%; }
+.hero--cv           { background-image: url("img/cv/IMG_5321.jpg"); }
+
+/* ---------- Layout --------------------------------------- */
+
+main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 3.5rem clamp(1.1rem, 4vw, 2rem) 1rem;
+}
+
+section { margin-bottom: 3.5rem; }
+
+.section-heading {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  color: var(--accent);
+  margin: 0 0 2rem;
+}
+.section-heading a { color: inherit; text-decoration: none; }
+.section-heading a:hover { color: var(--accent-dk); text-decoration: underline; }
+
+h2.plain {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text);
+  margin: 2.4rem 0 0.8rem;
+  text-align: center;
+}
+
+p { margin: 0 0 1.1rem; }
+
+.center { text-align: center; }
+.more-link { display: inline-block; margin-top: 0.5rem; font-family: var(--font-display); }
+
+/* ---------- Intro block (home) --------------------------- */
+
+.intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.8rem;
+}
+.intro img {
+  flex: 0 0 340px;
+  width: 340px;
+  align-self: flex-start;   /* whole photo, natural aspect ratio */
+  border-radius: 2px;
+}
+.intro-text { flex: 1 1 auto; min-width: 0; }
+.intro-text > p:first-child { margin-top: 0; }
+.contact { color: var(--muted); font-size: 0.98rem; }
+
+/* ---------- News list ------------------------------------ */
+
+.news-year {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  margin: 2rem 0 0.4rem;
+  color: var(--text);
+  text-align: center;
+}
+.news-list { margin: 0 0 1rem; padding-left: 1.3rem; }
+.news-list li { margin-bottom: 0.7rem; }
+
+/* ---------- Publication rows ---------------------------- */
+
+.pub {
+  display: flex;
+  gap: 1.6rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+}
+.pub:last-child { border-bottom: 1px solid var(--rule); }
+
+.pub-thumb {
+  flex: 0 0 160px;
+  width: 160px;
+}
+.pub-thumb img { border-radius: 2px; background: var(--bg-alt); }
+
+.pub-body { flex: 1 1 auto; min-width: 0; }
+.pub-title {
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+.pub-authors { margin-bottom: 0.15rem; }
+.pub-venue { color: var(--muted); }
+.pub-links { margin-top: 0.35rem; font-size: 0.98rem; }
+.pub-links a { white-space: nowrap; }
+.pub-links .sep { color: var(--rule); margin: 0 0.35rem; }
+
+.pub-list { margin: 0 0 1rem; padding-left: 1.3rem; }
+.pub-list li { margin-bottom: 0.7rem; }
+.pub-list p { margin: 0; }
+
+/* ---------- CV ------------------------------------------ */
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  padding: 0.55rem 1.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 3px;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.btn:hover { background: var(--accent); color: #fff; text-decoration: none; }
+
+.cv-subtitle {
+  font-family: var(--font-display);
+  color: var(--muted);
+  margin: -0.6rem 0 1.6rem;
+}
+
+.cv-entry {
+  display: flex;
+  gap: 1.75rem;
+  margin-bottom: 1.9rem;
+}
+.cv-entry .when {
+  flex: 0 0 9.5rem;
+  color: var(--muted);
+  font-size: 0.96rem;
+  padding-top: 0.15rem;
+}
+.cv-body { flex: 1 1 auto; min-width: 0; }
+.cv-body p { margin: 0 0 0.55rem; }
+.cv-body p:last-child { margin-bottom: 0; }
+.cv-role { font-weight: 700; }
+.cv-entry .news-list { margin-top: 0.5rem; }
+
+/* ---------- Footer ------------------------------------- */
+
+.site-footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem;
+  padding: 2.2rem 1rem 2.6rem;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Mobile ------------------------------------ */
+
+@media (max-width: 640px) {
+  .site-header {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 0.8rem 1rem;
+  }
+  .wordmark { font-size: 1rem; letter-spacing: 0.04em; }
+  .site-nav { flex-basis: 100%; margin-left: 0; justify-content: flex-start; gap: 1rem; row-gap: 0.3rem; }
+  .site-social { position: absolute; right: 1rem; top: 0.8rem; }
+  .hero { min-height: 220px; }
+
+  .intro { flex-direction: column; }
+  .intro img { flex-basis: auto; width: 220px; max-width: 60%; margin: 0 auto 1.2rem; align-self: center; }
+
+  .pub { flex-direction: column; gap: 0.9rem; }
+  .pub-thumb { flex-basis: auto; width: 200px; }
+
+  .cv-entry { flex-direction: column; gap: 0.3rem; }
+  .cv-entry .when { padding-top: 0; }
+}
